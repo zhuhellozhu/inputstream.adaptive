@@ -3127,10 +3127,9 @@ bool CInputStreamAdaptive::Open(INPUTSTREAM& props)
       std::map<std::string, std::string>::iterator i = manh.find("user-agent");
       if (i == manh.end()) { /* Not found */ }
       else {
-        std::string value = manh.at(key);
-        kodi::Log(ADDON_LOG_DEBUG, "found user agent: %s", value.c_str());
+        kodi::Log(ADDON_LOG_DEBUG, "found user agent: %s", manh["user-agent"].c_str());
         manh["user-agent"] = std::string(default_ua);
-        kodi::Log(ADDON_LOG_DEBUG, "found user agent: %s", value.c_str());
+        kodi::Log(ADDON_LOG_DEBUG, "found user agent: %s", manh["user-agent"].c_str());
       }
 
       medh = manh;
