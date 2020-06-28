@@ -3065,7 +3065,7 @@ bool CInputStreamAdaptive::Open(INPUTSTREAM& props)
 {
   kodi::Log(ADDON_LOG_DEBUG, "Open()");
 
-  const char* default_ua = "user-agent=Mozilla/5.0 (Windows NT 10; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.92 Safari/537.36";
+  const char* default_ua = "Mozilla/5.0 (Windows NT 10; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.92 Safari/537.36";
 
   const char *lt(""), *lk(""), *ld(""), *lsc(""), *mfup(""), *ov_audio(""), *mru("");
   uint32_t mrt = 0;
@@ -3122,10 +3122,17 @@ bool CInputStreamAdaptive::Open(INPUTSTREAM& props)
     {
       kodi::Log(ADDON_LOG_DEBUG, "found inputstream.adaptive.stream_headers: %s", props.m_ListItemProperties[i].m_strValue);
 
-      kodi::Log(ADDON_LOG_DEBUG, "use default ua: %s", default_ua);
+      parseheader(manh, props.m_ListItemProperties[i].m_strValue);
 
-      parseheader(manh, default_ua);
-      //parseheader(manh, props.m_ListItemProperties[i].m_strValue);
+      std::map<std::string, std::string>::iterator i = manh.find("user-agent");
+      if (i == manh.end()) { /* Not found */ }
+      else {
+        std::string value = manh.at(key);
+        kodi::Log(ADDON_LOG_DEBUG, "found user agent: %s", value.c_str());
+        manh["user-agent"] = std::string(default_ua);
+        kodi::Log(ADDON_LOG_DEBUG, "found user agent: %s", value.c_str());
+      }
+
       medh = manh;
       mpd_url = mpd_url.substr(0, mpd_url.find("|"));
     }
