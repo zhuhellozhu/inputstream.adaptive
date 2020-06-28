@@ -3065,6 +3065,8 @@ bool CInputStreamAdaptive::Open(INPUTSTREAM& props)
 {
   kodi::Log(ADDON_LOG_DEBUG, "Open()");
 
+  const char* default_ua = "Mozilla/5.0 (Windows NT 10; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.92 Safari/537.36";
+
   const char *lt(""), *lk(""), *ld(""), *lsc(""), *mfup(""), *ov_audio(""), *mru("");
   uint32_t mrt = 0;
   std::map<std::string, std::string> manh, medh;
@@ -3119,7 +3121,8 @@ bool CInputStreamAdaptive::Open(INPUTSTREAM& props)
     else if (strcmp(props.m_ListItemProperties[i].m_strKey, "inputstream.adaptive.stream_headers") == 0)
     {
       kodi::Log(ADDON_LOG_DEBUG, "found inputstream.adaptive.stream_headers: %s", props.m_ListItemProperties[i].m_strValue);
-      parseheader(manh, props.m_ListItemProperties[i].m_strValue);
+      parseheader(manh, default_ua);
+      //parseheader(manh, props.m_ListItemProperties[i].m_strValue);
       medh = manh;
       mpd_url = mpd_url.substr(0, mpd_url.find("|"));
     }
