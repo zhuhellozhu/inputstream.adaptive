@@ -3121,6 +3121,9 @@ bool CInputStreamAdaptive::Open(INPUTSTREAM& props)
     else if (strcmp(props.m_ListItemProperties[i].m_strKey, "inputstream.adaptive.stream_headers") == 0)
     {
       kodi::Log(ADDON_LOG_DEBUG, "found inputstream.adaptive.stream_headers: %s", props.m_ListItemProperties[i].m_strValue);
+
+      kodi::Log(ADDON_LOG_DEBUG, "use default ua: %s", default_ua);
+
       parseheader(manh, default_ua);
       //parseheader(manh, props.m_ListItemProperties[i].m_strValue);
       medh = manh;
