@@ -3065,7 +3065,7 @@ bool CInputStreamAdaptive::Open(INPUTSTREAM& props)
 {
   kodi::Log(ADDON_LOG_DEBUG, "Open()");
 
-  const char* default_ua = "Mozilla/5.0 (Windows NT 10; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.92 Safari/537.36";
+  const char* default_ua = "user-agent=Mozilla/5.0 (Windows NT 10; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.92 Safari/537.36";
 
   const char *lt(""), *lk(""), *ld(""), *lsc(""), *mfup(""), *ov_audio(""), *mru("");
   uint32_t mrt = 0;
