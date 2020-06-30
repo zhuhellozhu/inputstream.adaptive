@@ -3124,6 +3124,7 @@ bool CInputStreamAdaptive::Open(INPUTSTREAM& props)
 
       parseheader(manh, props.m_ListItemProperties[i].m_strValue);
 
+      #if 0
       std::map<std::string, std::string>::iterator i = manh.find("user-agent");
       if (i == manh.end()) { /* Not found */ }
       else {
@@ -3131,7 +3132,8 @@ bool CInputStreamAdaptive::Open(INPUTSTREAM& props)
         manh["user-agent"] = std::string(default_ua);
         kodi::Log(ADDON_LOG_DEBUG, "found user agent: %s", manh["user-agent"].c_str());
       }
-
+      #endif
+      
       medh = manh;
       mpd_url = mpd_url.substr(0, mpd_url.find("|"));
     }
